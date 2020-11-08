@@ -1,0 +1,188 @@
+@startuml usecaseDiagram
+left to right direction  
+
+User <|-- Character
+rectangle {
+    usecase ("Set habit") as SH
+    usecase ("Set Daily ")  as SD
+    usecase ("Set To-Do ") as STD
+    usecase ("Set task") as ST
+    usecase ("Buy items for coins") as BRP
+    usecase ("Set seasonal events") as SSE
+    usecase ("Add personal quests") as APQ
+    usecase ("Use abilities") as UA
+    usecase ("Organize challanges") as OC
+    usecase ("Accept quest") as AQ
+    Character -- SH
+    Character -- SD
+    Character -- STD
+    Character -- BRP
+    Character - UA
+    Character -- AQ
+    Admin -- SSE
+    Admin -- APQ
+    Admin -- OC
+}
+SH --> ST : << include >>
+SD --> ST : << include >>
+STD --> ST : << include >>
+UA -> ("Learn ability"): << include >>
+
+@enduml
+
+@startuml setTask
+Actor User
+collections Character.Tasks
+
+User -> Character.Tasks: check if task not exist
+User -> Task: << create >>
+activate Task
+Task -> Character.Tasks: add to Character array if tasks
+deactivate Task
+User ->Character.Tasks: completeTask(taskName)\ncomplete task and get reward
+@enduml
+
+@startuml buyItem
+Actor User
+collections Items
+collections Character.Items
+
+User -> Items: check if item exists in the shop
+User -> Item: check if Character have enough coins
+Item -> Character.Items: add items to Character array of items \nfor a price
+@enduml
+
+@startuml useAbility
+Actor User
+collections Abilities
+
+
+User -> Abilities: get Ability
+User -> Ability: learnAbility(abilityNane)
+Abilities -> Ability: check if character passes level\nand class conditions
+collections Character.Abilities
+Character.Abilities <- Ability: add ability to a Character array\nof abilities
+User -> Ability: useAbility(character)\ncheck if ability learned and activate it
+@enduml
+
+@startuml acceptQuest
+Actor User
+collections Character.Items
+
+User -> Character.Items: get Quest scroll
+User -> Item: acceptQuest(Quest)
+Item -> Quest: << create >>
+collections Character.Quests
+activate Quest
+Quest -> Character.Quests: add quest to Character array of quests
+deactivate Quest
+User -> Character.Quests: conpleteTask(Quest)\nget reward and remove quest from the array
+@enduml
+
+@startuml classesDiagram
+Class User{
+    name: String
+}
+
+Class Character extends User{
+    characterClass: String
+    level: Int
+    healthPoints: Int
+    maximumHP: Int
+    energyPoints: Int
+    experiencePoints: Int
+    coins: Int
+    anilities: Ability[]
+    buffs: Buff[]
+    habits: Habit[]
+    dailies: Daily[]
+    toDos: ToDo[]
+    personalRewards: Item[]
+    ---
+    addTask(Task)
+    removeTask(Task)
+    completeTask(Task)
+    buyItem(Item)
+}
+
+Class Task{
+    name: String
+    description: String
+    difficulty: Int
+    rewards: Reward
+    type: String
+}
+
+Class Habit extends Task{
+    startDay: Date
+    completionCount: Int
+}
+
+Class Daily extends Task{
+    deadline: Date
+    completionCount: Int
+    ---
+    chekDeadline()
+}
+
+Class ToDo extends Task{
+    deadline: Date
+    subTasks: List<String>[]
+    ---
+    chekDeadline()
+}
+
+Class Quest extends Task {
+    name: String
+    description: String
+}
+
+Class Challenge{
+    name: String
+    description: String
+    rewards: Reward
+    ---
+    checkChallengeConditions(character: Character)
+}
+
+Class Reward{
+    experiencePoints: Int
+    coins: Int
+    items: Item[]?
+    ---
+    getReward(character: Character)
+}
+
+Class Item {
+    name: String
+    characterClass: String
+    description: String
+    quantity: Int
+    price: Int
+    ---
+    useItem(it)
+}
+
+Class Ability {
+    name: String
+    characterClass: String
+    description: String
+    energyRequired: Int
+    levelRequired: Int
+    ---
+    useAbility(character: Character)
+}
+
+class Buff {
+    name: String
+    duration: Date
+}
+
+Character "1" <-- "*" Task
+Character "1" <-- "*" Challenge
+Character "1" <-- "*" Item
+Character "1" <-- "*" Buff
+Reward "1" --> "*" Item
+Reward "1" --> "1" Task
+Ability "*" --> "1" Character
+@enduml
