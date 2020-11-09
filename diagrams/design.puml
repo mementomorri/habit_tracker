@@ -34,10 +34,10 @@ UA -> ("Learn ability"): << include >>
 Actor User
 collections Character.Tasks
 
-User -> Character.Tasks: check if task not exist
+User -> Character.Tasks: check if Task don't exist in array
 User -> Task: << create >>
 activate Task
-Task -> Character.Tasks: add to Character array if tasks
+Task -> Character.Tasks: add to Character array of tasks
 deactivate Task
 User ->Character.Tasks: completeTask(taskName)\ncomplete task and get reward
 @enduml
@@ -77,6 +77,39 @@ activate Quest
 Quest -> Character.Quests: add quest to Character array of quests
 deactivate Quest
 User -> Character.Quests: conpleteTask(Quest)\nget reward and remove quest from the array
+@enduml
+
+@startuml setPersonalQuest
+actor Admin
+collections Characters
+
+Admin-> Characters: get Character
+Admin-> Quest: << create >>
+activate Quest
+Quest-> Character: add personal Quest to array of quests
+deactivate Quest
+@enduml
+
+@startuml setSeasonalEvent
+Actor Admin
+
+Admin-> Task: << create>>
+activate Task
+collections Characters
+Task-> Characters: go through every Character
+deactivate Task
+Characters -> Character: add Task to every Character
+@enduml
+
+@startuml organizeChallenges
+Actor Admin
+Actor User
+
+activate Challenge
+Admin-> Challenge: << create >>
+deactivate Challenge
+User -> Challenge: checkConditions()
+Challenge -> Character: getReward()
 @enduml
 
 @startuml classesDiagram
