@@ -1,0 +1,115 @@
+@startuml er
+
+    hide circle
+    skinparam minClassWidth 170
+
+    Entity User{
+        id: Number
+        name: Text
+        ---
+        characters: Number<FK>
+    }
+
+    Entity UserCharacter{
+        id: Number
+        ---
+        user: Number <FK>
+        character: Number <FK>
+    }
+
+   Entity Character{
+       id: Number
+       name: Text
+       ---
+       characterClass: Text
+       healthPoints: Number
+       maximumHP: Number
+       energyPoints: Number
+       experiencePoints: Number
+       coins: Number
+       habits: Habit[]
+       dailies: Daily[]
+       toDos: ToDo[]
+       personalRewards: Reward[]
+       abilities: Ability[]
+       buffs: Buff[]
+   }
+
+    Entity Ability{
+        id: Number
+        name: Text
+        ---
+        characterClass: Text
+        description: Text
+        energyRequired: Number
+        levelRequired: Number
+    }
+
+    Entity AbilityCharacter{
+        id: Number
+        ---
+        character_id: Number <FK>
+        ability_id: Number <FK>
+    }
+
+    Entity Challenge{
+        id: Number
+        name: Text
+        ---
+        description: Text
+        reward: Text
+    }
+
+    Entity Buff{
+        name: Text
+        ---
+        duration: Date
+    }
+
+    Entity Task{
+        name: Text
+        ---
+        description: Text
+        difficulty: Number
+        rewards: Reward
+        type: Text
+        deadline: Date?
+        completionCount: Number?
+    }
+
+    Entity Reward{
+        ---
+        experiencePoints: Number
+        coins: Number
+        items: Item[]?
+    }
+
+    Entity Item{
+        id: Number
+        name: Text
+        ---
+        quantity: Number
+        description: Text
+        price: Number
+    }
+
+    Entity Shop{
+        id: Number
+        name: Text
+        ---
+        quantity: Number
+        item_id: Number <FK>
+    }
+
+User ||--|{ UserCharacter
+UserCharacter ||--|{ Character
+Character ||--o{ AbilityCharacter
+AbilityCharacter }o--|| Ability
+Reward ||--|| Challenge
+Character ||--o{ Buff
+Character ||--o{ Task
+Task ||--|| Reward
+Item }o--|| Reward
+Shop ||--|| Item
+
+@enduml
