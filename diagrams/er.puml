@@ -5,8 +5,8 @@
 
     Entity User{
         id: Number
-        name: Text
         ---
+        name: Text
         characters: Number<FK>
     }
 
@@ -19,8 +19,8 @@
 
    Entity Character{
        id: Number
-       name: Text
        ---
+       name: Text
        characterClass: Text
        healthPoints: Number
        maximumHP: Number
@@ -30,22 +30,22 @@
        habits: Habit[]
        dailies: Daily[]
        toDos: ToDo[]
-       personalRewards: Reward[]
-       abilities: Ability[]
-       buffs: Buff[]
+       inventory: Item[]
+       abilities: Number <FK>
+       buffs: Text[]
    }
 
     Entity Ability{
         id: Number
-        name: Text
         ---
+        name: Text
         characterClass: Text
         description: Text
         energyRequired: Number
         levelRequired: Number
     }
 
-    Entity AbilityCharacter{
+    Entity CharacterAbility{
         id: Number
         ---
         character_id: Number <FK>
@@ -53,63 +53,57 @@
     }
 
     Entity Challenge{
-        id: Number
         name: Text
         ---
         description: Text
-        reward: Text
-    }
-
-    Entity Buff{
-        name: Text
-        ---
-        duration: Date
+        reward: Reward
     }
 
     Entity Task{
         name: Text
         ---
+        character_id: Number <FK>
         description: Text
         difficulty: Number
-        rewards: Reward
         type: Text
         deadline: Date?
+        startDate: Date?
         completionCount: Number?
-    }
-
-    Entity Reward{
-        ---
-        experiencePoints: Number
-        coins: Number
-        items: Item[]?
+        reward: Reward
     }
 
     Entity Item{
         id: Number
-        name: Text
         ---
+        name: Text
         quantity: Number
         description: Text
         price: Number
     }
 
+    Entity CharacterItem{
+        id: Number
+        ---
+        character_id: Number <FK>
+        item_id: Number <FK>
+    }
+
     Entity Shop{
         id: Number
-        name: Text
         ---
-        quantity: Number
         item_id: Number <FK>
     }
 
 User ||--|{ UserCharacter
 UserCharacter ||--|{ Character
-Character ||--o{ AbilityCharacter
-AbilityCharacter }o--|| Ability
-Reward ||--|| Challenge
-Character ||--o{ Buff
+Character ||--o{ CharacterAbility
+CharacterAbility }o--|| Ability
+Item }o--|| Challenge
 Character ||--o{ Task
-Task ||--|| Reward
-Item }o--|| Reward
-Shop ||--|| Item
+Task ||--o{ Item
+Shop |o--|| Item
+CharacterItem }o--|| Character
+CharacterItem }o--|| Item
+
 
 @enduml
