@@ -1,4 +1,4 @@
-# habit_tracker
+# UML
 
 This branch contains UML implementation of habit_tracker, codebase for future application in "src" folder with diagram of classes:
 
