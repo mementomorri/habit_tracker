@@ -1,0 +1,1646 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST api for habit tracker",
+    "description": "This is an api for REST server.  You can find\nout more about habit_tracker educational project  at\n[https://github.com/mementomorri/habit_tracker/](https://github.com/mementomorri/habit_tracker/)\n",
+    "contact": {
+      "email": "mementomorimore@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about this project",
+    "url": "https://github.com/mementomorri/habit_tracker/"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/mementomorri/REST_api_for_habit_tracker/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://petstore.swagger.io/v2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "Basic information about tracker users"
+    },
+    {
+      "name": "shop",
+      "description": "Access to item shop"
+    },
+    {
+      "name": "character",
+      "description": "Operations about character"
+    },
+    {
+      "name": "challenge",
+      "description": "Information about available challenges"
+    },
+    {
+      "name": "ability",
+      "description": "Access to all abilities wwich are possible to learn"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Show all users",
+        "description": "Get list of users",
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add new user",
+        "operationId": "addUser",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/User"
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "default": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update user data",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user that needs to be updated",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete a user",
+        "operationId": "removeUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user that needs to be deleted",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Student not found"
+          }
+        }
+      }
+    },
+    "/character": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Show all characters",
+        "description": "Returns list of all character",
+        "operationId": "getAllCharacters",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Create a new character",
+        "operationId": "addCharacter",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Character"
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "default": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/character/{characterId}": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Get character by ID",
+        "operationId": "getCharacter",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Character"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Update character data",
+        "operationId": "updateCharacter",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID of character that needs to be updated",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Delete a character data",
+        "operationId": "deleteCharacter",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to delete character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/inventory": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Get character's inventory",
+        "operationId": "getInventory",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add item to inventory",
+        "operationId": "addItemToinventory",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Item to be placed to inventory",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/inventory/{itemId}": {
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Remove item from the inventory",
+        "operationId": "removeItem",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "Character ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "Item ID to delete by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/habits": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Access to habits list",
+        "operationId": "getHabits",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add new habbit",
+        "operationId": "addHabit",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Habit to be placed to habits list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/habits/{habitId}": {
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Remove habit from the habit list",
+        "operationId": "removeHabit",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "Character ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "habitId",
+            "in": "path",
+            "description": "habit ID to delete by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/dailies": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Access to dailies list",
+        "operationId": "getDailies",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add new daily",
+        "operationId": "addDaily",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Daily to be placed to daily list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/dailies/{dailyId}": {
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Remove daily from the daily list",
+        "operationId": "removeDaily",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "Character ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "dailyId",
+            "in": "path",
+            "description": "daily ID to delete by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/todo": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Access to todo list",
+        "operationId": "getTodos",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add new todo",
+        "operationId": "addTodo",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Todo to be placed to todo list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/todo/{todoId}": {
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Remove todo from the todo list",
+        "operationId": "removeTodo",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "Character ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "todoId",
+            "in": "path",
+            "description": "todo ID to delete by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/abilities": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Access to a list of abilities that already learned",
+        "operationId": "getCharacterAbilities",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ability"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ability"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add new ability",
+        "operationId": "learnAbility",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Ability to be placed to todo list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ability"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/buffs": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Access characters active buffs",
+        "operationId": "getCharacterBuffs",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Buff"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Buff"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add buff to the character buff list",
+        "operationId": "addBuff",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Buff to be placed to character buff list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Buff"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/buff/{buffId}": {
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Remove buff from the buff list",
+        "operationId": "removeBuff",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "Character ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "buffId",
+            "in": "path",
+            "description": "Buff ID to delete by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/challenges": {
+      "get": {
+        "tags": [
+          "challenge"
+        ],
+        "summary": "Show all challenges",
+        "description": "Returns list of all challenges",
+        "operationId": "getChallenges",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Challenge"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "challenge"
+        ],
+        "summary": "Add a new challenge",
+        "operationId": "addChallenge",
+        "requestBody": {
+          "description": "Challenge to be placed to challenges list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Challenge"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "default": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/abilities": {
+      "get": {
+        "tags": [
+          "ability"
+        ],
+        "summary": "Show all abilities",
+        "description": "Returns list of all abilities",
+        "operationId": "getAbilities",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ability"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ability"
+        ],
+        "summary": "Add a new ability",
+        "operationId": "addAbility",
+        "requestBody": {
+          "description": "Ability to be placed to abilities list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ability"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "default": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/abilities/{abilityId}": {
+      "delete": {
+        "tags": [
+          "ability"
+        ],
+        "summary": "Delete ability so it cannot be learned",
+        "operationId": "deleteAbility",
+        "parameters": [
+          {
+            "name": "abilityId",
+            "in": "path",
+            "description": "Ability to delete by id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Ability not found"
+          }
+        }
+      }
+    },
+    "/shop": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Show all items that possible to buy",
+        "operationId": "getItemsToBuy",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Add new sellable item",
+        "operationId": "addItemToSell",
+        "requestBody": {
+          "description": "Item to be placed to the shop",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "default": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Character": {
+        "required": [
+          "characterClass",
+          "characterName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "characterName": {
+            "type": "string"
+          },
+          "characterClass": {
+            "type": "string"
+          },
+          "healthPoints": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "maximumHP": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "energyPoints": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "experiencePoints": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "coins": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "habits": {
+            "type": "array",
+            "xml": {
+              "name": "habits",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "dailies": {
+            "type": "array",
+            "xml": {
+              "name": "dailies",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "toDos": {
+            "type": "array",
+            "xml": {
+              "name": "toDos",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "inventory": {
+            "type": "array",
+            "xml": {
+              "name": "inventiry",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "abilities": {
+            "type": "array",
+            "xml": {
+              "name": "abilities",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Ability"
+            }
+          },
+          "buffs": {
+            "type": "array",
+            "xml": {
+              "name": "buffs",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Buff"
+            }
+          }
+        },
+        "xml": {
+          "name": "Character"
+        }
+      },
+      "Task": {
+        "required": [
+          "difficulty",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "character": {
+            "$ref": "#/components/schemas/Character"
+          },
+          "description": {
+            "type": "string"
+          },
+          "difficulty": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "type": "string"
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completionCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "reward": {
+            "type": "array",
+            "xml": {
+              "name": "reward",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Reward"
+            }
+          }
+        },
+        "xml": {
+          "name": "Task"
+        }
+      },
+      "Ability": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "characterClass": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "energyRequired": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "levelRequired": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "xml": {
+          "name": "Ability"
+        }
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "xml": {
+          "name": "Item"
+        }
+      },
+      "Reward": {
+        "type": "object",
+        "properties": {
+          "experiencePoints": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "items": {
+            "type": "array",
+            "xml": {
+              "name": "items",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          }
+        },
+        "xml": {
+          "name": "Reward"
+        }
+      },
+      "Buff": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "xml": {
+          "name": "Buff"
+        }
+      },
+      "Shop": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "item": {
+            "$ref": "#/components/schemas/Item"
+          }
+        },
+        "xml": {
+          "name": "Shop"
+        }
+      },
+      "Challenge": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "reward": {
+            "$ref": "#/components/schemas/Reward"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "characters": {
+            "type": "array",
+            "xml": {
+              "name": "characters",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Character"
+            }
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      }
+    },
+    "requestBodies": {
+      "Character": {
+        "description": "Character object that needs to be added",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Character"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Character"
+            }
+          }
+        }
+      },
+      "User": {
+        "description": "User object that needs to be added",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "Item": {
+        "description": "Item object that needs to be added",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Item"
+            }
+          }
+        }
+      },
+      "Challenge": {
+        "description": "Challenge object that needs to be added",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Challenge"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Challenge"
+            }
+          }
+        }
+      },
+      "Ability": {
+        "description": "Ability object that needs to be added",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Ability"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Ability"
+            }
+          }
+        }
+      }
+    }
+  }
+}
