@@ -29,7 +29,8 @@
        coins: Number
        habits: Habit[]
        dailies: Daily[]
-       toDos: ToDo[]
+       toDos: Todo[]
+       quests: Quest[]
        inventory: Item[]
        abilities: Number <FK>
        buffs: Text[]
@@ -94,6 +95,13 @@
         item_id: Number <FK>
     }
 
+    entity Buff{
+        name: Text
+        ---
+        duration: Date
+        character_id: Number <FK>
+    }
+
 User ||--|{ UserCharacter
 UserCharacter ||--|{ Character
 Character ||--o{ CharacterAbility
@@ -104,6 +112,6 @@ Task ||--o{ Item
 Shop |o--|| Item
 CharacterItem }o--|| Character
 CharacterItem }o--|| Item
-
+Character ||--o{ Buff
 
 @enduml
