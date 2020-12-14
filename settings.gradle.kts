@@ -1,2 +1,2 @@
-rootProject.name = "habit_tracker_ORM"
+rootProject.name = "habit_tracker"
 
