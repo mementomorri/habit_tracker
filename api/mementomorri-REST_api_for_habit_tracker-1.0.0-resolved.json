@@ -92,6 +92,50 @@
       }
     },
     "/user/{userId}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Access to user data",
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
       "put": {
         "tags": [
           "user"
@@ -113,6 +157,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Input has been accepted"
+          },
           "405": {
             "description": "Invalid input"
           }
@@ -257,6 +304,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Input has been accepted"
+          },
           "405": {
             "description": "Invalid input"
           }
@@ -522,7 +572,7 @@
         }
       }
     },
-    "/character/{characterId}/habits/{habitId}": {
+    "/character/{characterId}/habits/{habitName}": {
       "delete": {
         "tags": [
           "character"
@@ -543,15 +593,14 @@
             }
           },
           {
-            "name": "habitId",
+            "name": "habitName",
             "in": "path",
             "description": "habit ID to delete by",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -660,7 +709,7 @@
         }
       }
     },
-    "/character/{characterId}/dailies/{dailyId}": {
+    "/character/{characterId}/dailies/{dailyName}": {
       "delete": {
         "tags": [
           "character"
@@ -681,15 +730,14 @@
             }
           },
           {
-            "name": "dailyId",
+            "name": "dailyName",
             "in": "path",
             "description": "daily ID to delete by",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -798,7 +846,7 @@
         }
       }
     },
-    "/character/{characterId}/todo/{todoId}": {
+    "/character/{characterId}/todo/{todoName}": {
       "delete": {
         "tags": [
           "character"
@@ -819,15 +867,151 @@
             }
           },
           {
-            "name": "todoId",
+            "name": "todoName",
             "in": "path",
             "description": "todo ID to delete by",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/quests": {
+      "get": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Access to quests list",
+        "operationId": "getQuests",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Character not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Add new quest",
+        "operationId": "addQuest",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "ID to find character by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Quest to be placed to quest list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Task"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/character/{characterId}/quests/{questName}": {
+      "delete": {
+        "tags": [
+          "character"
+        ],
+        "summary": "Remove quest from the quest list",
+        "operationId": "removeQuest",
+        "parameters": [
+          {
+            "name": "characterId",
+            "in": "path",
+            "description": "Character ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "questName",
+            "in": "path",
+            "description": "Quest ID to delete by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1028,7 +1212,7 @@
         }
       }
     },
-    "/character/{characterId}/buff/{buffId}": {
+    "/character/{characterId}/buff/{buffName}": {
       "delete": {
         "tags": [
           "character"
@@ -1049,15 +1233,14 @@
             }
           },
           {
-            "name": "buffId",
+            "name": "buffName",
             "in": "path",
             "description": "Buff ID to delete by",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -1177,6 +1360,38 @@
       }
     },
     "/abilities/{abilityId}": {
+      "get": {
+        "tags": [
+          "ability"
+        ],
+        "summary": "Access to ability fuul information",
+        "operationId": "getAbility",
+        "parameters": [
+          {
+            "name": "abilityId",
+            "in": "path",
+            "description": "Ability to get by id",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Ability not found"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ability"
@@ -1253,6 +1468,81 @@
           },
           "default": {
             "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/shop/{itemId}": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Access to certain item at shop",
+        "operationId": "getItemAtShop",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "Item ID to find by",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Item"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Item not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Update item data",
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "ID of item that needs to be updated",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Input has been accepted"
+          },
+          "405": {
+            "description": "Invalid input"
           }
         }
       }

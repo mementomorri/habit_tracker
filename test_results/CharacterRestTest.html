@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class CharacterRestTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class CharacterRestTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; CharacterRestTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">1.273s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">restRepoMapTest</td>
+<td class="success">1.273s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>10:11:17.490 [Test worker] DEBUG Exposed - SELECT VALUE FROM INFORMATION_SCHEMA.SETTINGS WHERE NAME = 'MODE'
+10:11:17.513 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS &quot;USER&quot; (ID INT AUTO_INCREMENT PRIMARY KEY, &quot;NAME&quot; VARCHAR(255) NOT NULL)
+10:11:17.514 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS &quot;CHARACTER&quot; (ID INT AUTO_INCREMENT PRIMARY KEY, &quot;NAME&quot; VARCHAR(50) NOT NULL, &quot;characterClass&quot; VARCHAR(50) NOT NULL, LEVE INT NOT NULL, &quot;maximumHP&quot; INT NOT NULL, &quot;healthPoints&quot; INT NOT NULL, &quot;energyPoints&quot; INT NOT NULL, &quot;experiencePoints&quot; INT NOT NULL, COINS INT NOT NULL)
+10:11:17.522 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS USERCHARACTER (ID INT AUTO_INCREMENT PRIMARY KEY, &quot;userId&quot; INT NOT NULL, &quot;characterId&quot; INT NOT NULL, CONSTRAINT FK_USERCHARACTER_USERID_ID FOREIGN KEY (&quot;userId&quot;) REFERENCES &quot;USER&quot;(ID) ON DELETE RESTRICT ON UPDATE RESTRICT, CONSTRAINT FK_USERCHARACTER_CHARACTERID_ID FOREIGN KEY (&quot;characterId&quot;) REFERENCES &quot;CHARACTER&quot;(ID) ON DELETE RESTRICT ON UPDATE RESTRICT)
+10:11:17.524 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS TASK (&quot;NAME&quot; VARCHAR(50) NOT NULL, DESCRIPTION VARCHAR(510) NOT NULL, DIFFICULTY VARCHAR(10) NOT NULL, &quot;TYPE&quot; VARCHAR(50) NOT NULL, &quot;characterId&quot; INT NOT NULL, DEADLINE DATE NOT NULL, &quot;startDate&quot; DATE NOT NULL, &quot;completionCount&quot; INT NOT NULL, CONSTRAINT FK_TASK_CHARACTERID_ID FOREIGN KEY (&quot;characterId&quot;) REFERENCES &quot;CHARACTER&quot;(ID) ON DELETE RESTRICT ON UPDATE RESTRICT)
+10:11:17.525 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS BUFF (&quot;NAME&quot; VARCHAR(50) NOT NULL, DURATION DATE NOT NULL, CHARACTER_ID INT NOT NULL, CONSTRAINT FK_BUFF_CHARACTER_ID_ID FOREIGN KEY (CHARACTER_ID) REFERENCES &quot;CHARACTER&quot;(ID) ON DELETE RESTRICT ON UPDATE RESTRICT)
+10:11:17.527 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS ITEMS (ID INT AUTO_INCREMENT PRIMARY KEY, QUANTITY INT NOT NULL, &quot;NAME&quot; VARCHAR(50) NOT NULL, DESCRIPTION VARCHAR(510) NOT NULL, PRICE INT NOT NULL)
+10:11:17.530 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS CHARACTERITEM (ID INT AUTO_INCREMENT PRIMARY KEY, ITEM_ID INT NOT NULL, CHARACTER_ID INT NOT NULL, QUANTITY INT NOT NULL, CONSTRAINT FK_CHARACTERITEM_ITEM_ID_ID FOREIGN KEY (ITEM_ID) REFERENCES ITEMS(ID) ON DELETE RESTRICT ON UPDATE RESTRICT, CONSTRAINT FK_CHARACTERITEM_CHARACTER_ID_ID FOREIGN KEY (CHARACTER_ID) REFERENCES &quot;CHARACTER&quot;(ID) ON DELETE RESTRICT ON UPDATE RESTRICT)
+10:11:17.530 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS ABILITY (ID INT AUTO_INCREMENT PRIMARY KEY, &quot;NAME&quot; VARCHAR(50) NOT NULL, &quot;characterClass&quot; VARCHAR(50) NOT NULL, DESCRIPTION VARCHAR(255) NOT NULL, &quot;energyRequired&quot; INT NOT NULL, &quot;levelRequired&quot; INT NOT NULL)
+10:11:17.534 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS CHARACTERABILITY (ID INT AUTO_INCREMENT PRIMARY KEY, ABILITY_ID INT NOT NULL, CHARACTER_ID INT NOT NULL, CONSTRAINT FK_CHARACTERABILITY_ABILITY_ID_ID FOREIGN KEY (ABILITY_ID) REFERENCES ABILITY(ID) ON DELETE RESTRICT ON UPDATE RESTRICT, CONSTRAINT FK_CHARACTERABILITY_CHARACTER_ID_ID FOREIGN KEY (CHARACTER_ID) REFERENCES &quot;CHARACTER&quot;(ID) ON DELETE RESTRICT ON UPDATE RESTRICT)
+10:11:17.535 [Test worker] DEBUG Exposed - CREATE TABLE IF NOT EXISTS CHALLENGE (&quot;NAME&quot; VARCHAR(50) NOT NULL, DESCRIPTION VARCHAR(255) NOT NULL)
+10:11:17.548 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Nice and warm cup of coffee to raise an adventurer spirit', 'Coffee', 20, 20)
+10:11:17.551 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('A cup of tasty green tea, after a few sips it restores some of your energy', 'Green tea', 9, 20)
+10:11:17.554 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('This little warm potion restores little amount of your life energy, tastes like cough syrup', 'Healing potion', 12, 20)
+10:11:17.557 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Some old scroll describing the story of Dust rabbits', 'Dust rabbits scroll', 6, 20)
+10:11:17.559 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Some old scroll describing the story of Dish disaster', 'Dish disaster scroll', 7, 20)
+10:11:17.563 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Some old scroll describing the story of Magic in bottle', 'Magic in bottle scroll', 5, 20)
+10:11:17.565 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('This little warm potion restores little amount of your life energy, tastes like cough syrup', 'Healing potion', 12, 20)
+10:11:17.569 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('A cup of tasty green tea, after a few sips it restores some of your energy', 'Green tea', 9, 20)
+10:11:17.570 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Nice and warm cup of coffee to raise an adventurer spirit', 'Coffee', 20, 20)
+10:11:17.571 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Some old scroll describing the story of Dust rabbits', 'Dust rabbits scroll', 6, 20)
+10:11:17.572 [Test worker] DEBUG Exposed - INSERT INTO ITEMS (DESCRIPTION, &quot;NAME&quot;, PRICE, QUANTITY) VALUES ('Some old scroll describing the story of Dish disaster', 'Dish disaster scroll', 7, 20)
+10:11:17.576 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('MAGICIAN', 'Magician focuses at they''re target so there is little sparks around it', 20, 3, 'Bursts of flame')
+10:11:17.578 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('MAGICIAN', 'Magician says some inspiring words to other person that heals they''re heart or inspires themself by thinking about good things', 40, 6, 'Cheering words')
+10:11:17.580 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('MAGICIAN', 'Magician spins around them and makes air around become cold, time freezes and stops for a while', 40, 9, 'Frost chill')
+10:11:17.583 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('WARRIOR', 'Warrior stands up for they''re nearest friend and protects them from suffer of fail or protects themself with a shield', 40, 6, 'Friendly protection')
+10:11:17.586 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('ARCHER', 'Archer tries shoot every target possible as quickly as they''re swiftness let them', 40, 6, 'Greedy profit')
+10:11:17.588 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('ARCHER', 'Archer breathes deeply and focuses on theirs tasks, that makes them confident and raise up the spirit', 20, 3, 'Hunter''s focus')
+10:11:17.591 [Test worker] DEBUG Exposed - INSERT INTO ABILITY (&quot;characterClass&quot;, DESCRIPTION, &quot;energyRequired&quot;, &quot;levelRequired&quot;, &quot;NAME&quot;) VALUES ('WARRIOR', 'Warrior focuses on they''re swordplay skill while swinging it at the dummy ', 20, 3, 'Swordplay practice')
+10:11:17.643 [Test worker] INFO ktor.test - No ktor.deployment.watch patterns specified, automatic reload is not active
+10:11:17.782 [DefaultDispatcher-worker-1 @request#1] DEBUG Exposed - INSERT INTO &quot;CHARACTER&quot; (&quot;characterClass&quot;, COINS, &quot;energyPoints&quot;, &quot;experiencePoints&quot;, &quot;healthPoints&quot;, LEVE, &quot;maximumHP&quot;, &quot;NAME&quot;) VALUES ('MAGICIAN', 0, 100, 0, 30, 15, 30, 'Alice')
+10:11:17.800 [DefaultDispatcher-worker-1 @request#3] DEBUG Exposed - INSERT INTO &quot;CHARACTER&quot; (&quot;characterClass&quot;, COINS, &quot;energyPoints&quot;, &quot;experiencePoints&quot;, &quot;healthPoints&quot;, LEVE, &quot;maximumHP&quot;, &quot;NAME&quot;) VALUES ('WARRIOR', 0, 100, 0, 50, 15, 50, 'Bob')
+10:11:17.802 [DefaultDispatcher-worker-1 @request#5] DEBUG Exposed - INSERT INTO &quot;CHARACTER&quot; (&quot;characterClass&quot;, COINS, &quot;energyPoints&quot;, &quot;experiencePoints&quot;, &quot;healthPoints&quot;, LEVE, &quot;maximumHP&quot;, &quot;NAME&quot;) VALUES ('ARCHER', 0, 100, 0, 40, 15, 40, 'Charlie')
+10:11:17.819 [DefaultDispatcher-worker-1 @request#9] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.823 [DefaultDispatcher-worker-1 @request#9] DEBUG Exposed - SELECT CHARACTERITEM.ID, CHARACTERITEM.ITEM_ID, CHARACTERITEM.CHARACTER_ID, CHARACTERITEM.QUANTITY FROM CHARACTERITEM
+10:11:17.824 [DefaultDispatcher-worker-1 @request#9] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS
+10:11:17.827 [DefaultDispatcher-worker-1 @request#9] DEBUG Exposed - INSERT INTO CHARACTERITEM (CHARACTER_ID, ITEM_ID, QUANTITY) VALUES (1, 2, 2)
+10:11:17.830 [DefaultDispatcher-worker-1 @request#11] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.831 [DefaultDispatcher-worker-1 @request#11] DEBUG Exposed - SELECT CHARACTERITEM.ID, CHARACTERITEM.ITEM_ID, CHARACTERITEM.CHARACTER_ID, CHARACTERITEM.QUANTITY FROM CHARACTERITEM
+10:11:17.833 [DefaultDispatcher-worker-1 @request#11] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 2
+10:11:17.834 [DefaultDispatcher-worker-1 @request#11] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS
+10:11:17.835 [DefaultDispatcher-worker-1 @request#11] DEBUG Exposed - INSERT INTO CHARACTERITEM (CHARACTER_ID, ITEM_ID, QUANTITY) VALUES (1, 1, 3)
+10:11:17.837 [DefaultDispatcher-worker-1 @request#13] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.839 [DefaultDispatcher-worker-1 @request#13] DEBUG Exposed - SELECT CHARACTERITEM.ID, CHARACTERITEM.ITEM_ID, CHARACTERITEM.CHARACTER_ID, CHARACTERITEM.QUANTITY FROM CHARACTERITEM
+10:11:17.840 [DefaultDispatcher-worker-1 @request#13] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 2
+10:11:17.841 [DefaultDispatcher-worker-1 @request#13] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 1
+10:11:17.841 [DefaultDispatcher-worker-1 @request#13] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS
+10:11:17.843 [DefaultDispatcher-worker-1 @request#13] DEBUG Exposed - INSERT INTO CHARACTERITEM (CHARACTER_ID, ITEM_ID, QUANTITY) VALUES (1, 3, 2)
+10:11:17.846 [DefaultDispatcher-worker-1 @request#15] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.854 [DefaultDispatcher-worker-1 @request#17] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.857 [DefaultDispatcher-worker-1 @request#17] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.858 [DefaultDispatcher-worker-1 @request#17] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.871 [DefaultDispatcher-worker-1 @request#17] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'Brush the teeth every morning', 'VERYEASY', 'Brush the teeth', '-999999999-01-01', 'HABIT')
+10:11:17.873 [DefaultDispatcher-worker-1 @request#17] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.875 [DefaultDispatcher-worker-1 @request#19] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.877 [DefaultDispatcher-worker-1 @request#19] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.878 [DefaultDispatcher-worker-1 @request#19] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.880 [DefaultDispatcher-worker-1 @request#19] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'Brush the teeth every morning', 'VERYEASY', 'Brush the teeth twice', '-999999999-01-01', 'HABIT')
+10:11:17.881 [DefaultDispatcher-worker-1 @request#19] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.885 [DefaultDispatcher-worker-1 @request#21] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.888 [DefaultDispatcher-worker-1 @request#23] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.890 [DefaultDispatcher-worker-1 @request#23] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.891 [DefaultDispatcher-worker-1 @request#23] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.895 [DefaultDispatcher-worker-1 @request#23] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'Stretch at least 5 minutes a day', 'EASY', 'Stretch at the morning', '-999999999-01-01', 'DAILY')
+10:11:17.896 [DefaultDispatcher-worker-1 @request#23] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.898 [DefaultDispatcher-worker-1 @request#25] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.899 [DefaultDispatcher-worker-1 @request#25] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.901 [DefaultDispatcher-worker-1 @request#25] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.903 [DefaultDispatcher-worker-1 @request#25] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'Stretch at least 5 minutes a day', 'EASY', 'Stretch at the evening', '-999999999-01-01', 'DAILY')
+10:11:17.904 [DefaultDispatcher-worker-1 @request#25] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.907 [DefaultDispatcher-worker-1 @request#27] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.910 [DefaultDispatcher-worker-1 @request#29] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.912 [DefaultDispatcher-worker-1 @request#29] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.914 [DefaultDispatcher-worker-1 @request#29] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.917 [DefaultDispatcher-worker-1 @request#29] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'just a test todo', 'VERYEASY', 'test todo', '-999999999-01-01', 'TODO')
+10:11:17.918 [DefaultDispatcher-worker-1 @request#29] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.920 [DefaultDispatcher-worker-1 @request#31] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.922 [DefaultDispatcher-worker-1 @request#31] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.923 [DefaultDispatcher-worker-1 @request#31] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.924 [DefaultDispatcher-worker-1 @request#31] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'just a test todo', 'VERYEASY', 'second test todo', '-999999999-01-01', 'TODO')
+10:11:17.925 [DefaultDispatcher-worker-1 @request#31] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.929 [DefaultDispatcher-worker-1 @request#33] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.932 [DefaultDispatcher-worker-1 @request#35] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.933 [DefaultDispatcher-worker-1 @request#35] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.936 [DefaultDispatcher-worker-1 @request#35] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.940 [DefaultDispatcher-worker-1 @request#35] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'test quest', 'MEDIUM', 'first test quest', '-999999999-01-01', 'QUEST')
+10:11:17.941 [DefaultDispatcher-worker-1 @request#35] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.944 [DefaultDispatcher-worker-1 @request#37] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.946 [DefaultDispatcher-worker-1 @request#37] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.947 [DefaultDispatcher-worker-1 @request#37] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.949 [DefaultDispatcher-worker-1 @request#37] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'test quest', 'MEDIUM', 'second test quest', '-999999999-01-01', 'QUEST')
+10:11:17.951 [DefaultDispatcher-worker-1 @request#37] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.953 [DefaultDispatcher-worker-1 @request#39] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.955 [DefaultDispatcher-worker-1 @request#39] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.956 [DefaultDispatcher-worker-1 @request#39] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.957 [DefaultDispatcher-worker-1 @request#39] DEBUG Exposed - INSERT INTO TASK (&quot;characterId&quot;, &quot;completionCount&quot;, DEADLINE, DESCRIPTION, DIFFICULTY, &quot;NAME&quot;, &quot;startDate&quot;, &quot;TYPE&quot;) VALUES (1, 0, '-999999999-01-01', 'test quest', 'MEDIUM', 'third test quest', '-999999999-01-01', 'QUEST')
+10:11:17.958 [DefaultDispatcher-worker-1 @request#39] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:17.961 [DefaultDispatcher-worker-1 @request#41] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.966 [DefaultDispatcher-worker-1 @request#43] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY
+10:11:17.968 [DefaultDispatcher-worker-1 @request#43] DEBUG Exposed - INSERT INTO CHARACTERABILITY (ABILITY_ID, CHARACTER_ID) VALUES (1, 1)
+10:11:17.970 [DefaultDispatcher-worker-1 @request#45] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY
+10:11:17.971 [DefaultDispatcher-worker-1 @request#45] DEBUG Exposed - INSERT INTO CHARACTERABILITY (ABILITY_ID, CHARACTER_ID) VALUES (2, 1)
+10:11:17.973 [DefaultDispatcher-worker-1 @request#47] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY
+10:11:17.974 [DefaultDispatcher-worker-1 @request#47] DEBUG Exposed - INSERT INTO CHARACTERABILITY (ABILITY_ID, CHARACTER_ID) VALUES (3, 1)
+10:11:17.980 [DefaultDispatcher-worker-1 @request#51] DEBUG Exposed - INSERT INTO BUFF (CHARACTER_ID, DURATION, &quot;NAME&quot;) VALUES (1, '2020-12-15', 'sweet tooth')
+10:11:17.981 [DefaultDispatcher-worker-1 @request#51] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.982 [DefaultDispatcher-worker-1 @request#51] DEBUG Exposed - SELECT BUFF.&quot;NAME&quot;, BUFF.DURATION, BUFF.CHARACTER_ID FROM BUFF
+10:11:17.984 [DefaultDispatcher-worker-1 @request#53] DEBUG Exposed - INSERT INTO BUFF (CHARACTER_ID, DURATION, &quot;NAME&quot;) VALUES (1, '2020-12-15', 'sweet ears')
+10:11:17.985 [DefaultDispatcher-worker-1 @request#53] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.986 [DefaultDispatcher-worker-1 @request#53] DEBUG Exposed - SELECT BUFF.&quot;NAME&quot;, BUFF.DURATION, BUFF.CHARACTER_ID FROM BUFF
+10:11:17.988 [DefaultDispatcher-worker-1 @request#55] DEBUG Exposed - INSERT INTO BUFF (CHARACTER_ID, DURATION, &quot;NAME&quot;) VALUES (1, '2020-12-15', 'sweet nose')
+10:11:17.989 [DefaultDispatcher-worker-1 @request#55] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:17.990 [DefaultDispatcher-worker-1 @request#55] DEBUG Exposed - SELECT BUFF.&quot;NAME&quot;, BUFF.DURATION, BUFF.CHARACTER_ID FROM BUFF
+10:11:17.993 [DefaultDispatcher-worker-1 @request#59] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot;
+10:11:18.009 [DefaultDispatcher-worker-2 @request#63] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+[Character whit: name-Alice, class-MAGICIAN, id-1, Character whit: name-Bob, class-WARRIOR, id-2, Character whit: name-Charlie, class-ARCHER, id-3]
+10:11:18.012 [DefaultDispatcher-worker-2 @request#67] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.013 [DefaultDispatcher-worker-2 @request#67] DEBUG Exposed - SELECT CHARACTERITEM.ID, CHARACTERITEM.ITEM_ID, CHARACTERITEM.CHARACTER_ID, CHARACTERITEM.QUANTITY FROM CHARACTERITEM
+10:11:18.013 [DefaultDispatcher-worker-2 @request#67] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 2
+10:11:18.014 [DefaultDispatcher-worker-2 @request#67] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 1
+10:11:18.015 [DefaultDispatcher-worker-2 @request#67] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 3
+[Item with: id=2, name=Green tea, quantity=2, Item with: id=1, name=Coffee, quantity=3, Item with: id=3, name=Healing potion, quantity=2]
+10:11:18.018 [DefaultDispatcher-worker-2 @request#71] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.019 [DefaultDispatcher-worker-2 @request#71] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.023 [DefaultDispatcher-worker-2 @request#75] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.024 [DefaultDispatcher-worker-2 @request#75] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.027 [DefaultDispatcher-worker-1 @request#79] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.029 [DefaultDispatcher-worker-1 @request#79] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.032 [DefaultDispatcher-worker-1 @request#83] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.033 [DefaultDispatcher-worker-1 @request#83] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.036 [DefaultDispatcher-worker-2 @request#87] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.038 [DefaultDispatcher-worker-2 @request#87] DEBUG Exposed - SELECT CHARACTERABILITY.ID, CHARACTERABILITY.ABILITY_ID, CHARACTERABILITY.CHARACTER_ID FROM CHARACTERABILITY
+10:11:18.039 [DefaultDispatcher-worker-2 @request#87] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY WHERE ABILITY.ID = 1
+10:11:18.039 [DefaultDispatcher-worker-2 @request#87] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY WHERE ABILITY.ID = 2
+10:11:18.040 [DefaultDispatcher-worker-2 @request#87] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY WHERE ABILITY.ID = 3
+10:11:18.043 [DefaultDispatcher-worker-3 @request#91] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.043 [DefaultDispatcher-worker-3 @request#91] DEBUG Exposed - SELECT BUFF.&quot;NAME&quot;, BUFF.DURATION, BUFF.CHARACTER_ID FROM BUFF
+10:11:18.050 [DefaultDispatcher-worker-1 @request#95] DEBUG Exposed - UPDATE &quot;CHARACTER&quot; SET &quot;NAME&quot;='Updated Charlie', &quot;characterClass&quot;='ARCHER', LEVE=1, &quot;maximumHP&quot;=40, &quot;healthPoints&quot;=40, &quot;energyPoints&quot;=100, &quot;experiencePoints&quot;=0, COINS=0 WHERE &quot;CHARACTER&quot;.ID = 3
+10:11:18.051 [DefaultDispatcher-worker-1 @request#97] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 3
+10:11:18.056 [DefaultDispatcher-worker-2 @request#101] DEBUG Exposed - DELETE FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 2
+10:11:18.058 [DefaultDispatcher-worker-2 @request#103] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.059 [DefaultDispatcher-worker-2 @request#103] DEBUG Exposed - SELECT CHARACTERITEM.ID, CHARACTERITEM.ITEM_ID, CHARACTERITEM.CHARACTER_ID, CHARACTERITEM.QUANTITY FROM CHARACTERITEM
+10:11:18.060 [DefaultDispatcher-worker-2 @request#103] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 2
+10:11:18.060 [DefaultDispatcher-worker-2 @request#103] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 1
+10:11:18.061 [DefaultDispatcher-worker-2 @request#103] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 3
+10:11:18.064 [DefaultDispatcher-worker-2 @request#103] DEBUG Exposed - DELETE FROM CHARACTERITEM WHERE (CHARACTERITEM.CHARACTER_ID = 1) AND (CHARACTERITEM.ITEM_ID = 1)
+10:11:18.066 [DefaultDispatcher-worker-2 @request#105] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.068 [DefaultDispatcher-worker-2 @request#105] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.068 [DefaultDispatcher-worker-2 @request#105] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.071 [DefaultDispatcher-worker-2 @request#105] DEBUG Exposed - DELETE FROM TASK WHERE (TASK.&quot;characterId&quot; = 1) AND (TASK.&quot;NAME&quot; = 'Brush the teeth') AND (TASK.&quot;TYPE&quot; = 'HABIT')
+10:11:18.072 [DefaultDispatcher-worker-2 @request#105] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.074 [DefaultDispatcher-worker-2 @request#107] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.075 [DefaultDispatcher-worker-2 @request#107] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.076 [DefaultDispatcher-worker-2 @request#107] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.078 [DefaultDispatcher-worker-2 @request#107] DEBUG Exposed - DELETE FROM TASK WHERE (TASK.&quot;characterId&quot; = 1) AND (TASK.&quot;NAME&quot; = 'Stretch at the morning') AND (TASK.&quot;TYPE&quot; = 'DAILY')
+10:11:18.079 [DefaultDispatcher-worker-2 @request#107] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.081 [DefaultDispatcher-worker-2 @request#109] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.082 [DefaultDispatcher-worker-2 @request#109] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.082 [DefaultDispatcher-worker-2 @request#109] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.085 [DefaultDispatcher-worker-2 @request#109] DEBUG Exposed - DELETE FROM TASK WHERE (TASK.&quot;characterId&quot; = 1) AND (TASK.&quot;NAME&quot; = 'test todo') AND (TASK.&quot;TYPE&quot; = 'TODO')
+10:11:18.086 [DefaultDispatcher-worker-2 @request#109] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.088 [DefaultDispatcher-worker-2 @request#111] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.089 [DefaultDispatcher-worker-2 @request#111] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.089 [DefaultDispatcher-worker-2 @request#111] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.091 [DefaultDispatcher-worker-2 @request#111] DEBUG Exposed - DELETE FROM TASK WHERE (TASK.&quot;characterId&quot; = 1) AND (TASK.&quot;NAME&quot; = 'first test quest') AND (TASK.&quot;TYPE&quot; = 'QUEST')
+10:11:18.092 [DefaultDispatcher-worker-2 @request#111] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.095 [DefaultDispatcher-worker-2 @request#113] DEBUG Exposed - DELETE FROM BUFF WHERE (BUFF.CHARACTER_ID = 1) AND (BUFF.&quot;NAME&quot; = 'sweet tooth')
+10:11:18.097 [DefaultDispatcher-worker-2 @request#115] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot;
+10:11:18.100 [DefaultDispatcher-worker-1 @request#119] DEBUG Exposed - SELECT &quot;CHARACTER&quot;.ID, &quot;CHARACTER&quot;.&quot;NAME&quot;, &quot;CHARACTER&quot;.&quot;characterClass&quot;, &quot;CHARACTER&quot;.LEVE, &quot;CHARACTER&quot;.&quot;maximumHP&quot;, &quot;CHARACTER&quot;.&quot;healthPoints&quot;, &quot;CHARACTER&quot;.&quot;energyPoints&quot;, &quot;CHARACTER&quot;.&quot;experiencePoints&quot;, &quot;CHARACTER&quot;.COINS FROM &quot;CHARACTER&quot; WHERE &quot;CHARACTER&quot;.ID = 1
+10:11:18.102 [Test worker] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+[Task with: name=Brush the teeth twice, difficulty=VERYEASY,type=HABIT, characterId=1, completionCount=0]
+10:11:18.103 [Test worker] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.104 [Test worker] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.104 [Test worker] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.105 [Test worker] DEBUG Exposed - SELECT TASK.&quot;NAME&quot;, TASK.DESCRIPTION, TASK.DIFFICULTY, TASK.&quot;TYPE&quot;, TASK.&quot;characterId&quot;, TASK.DEADLINE, TASK.&quot;startDate&quot;, TASK.&quot;completionCount&quot; FROM TASK
+10:11:18.105 [Test worker] DEBUG Exposed - SELECT CHARACTERABILITY.ID, CHARACTERABILITY.ABILITY_ID, CHARACTERABILITY.CHARACTER_ID FROM CHARACTERABILITY
+10:11:18.106 [Test worker] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY WHERE ABILITY.ID = 1
+10:11:18.106 [Test worker] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY WHERE ABILITY.ID = 2
+10:11:18.107 [Test worker] DEBUG Exposed - SELECT ABILITY.ID, ABILITY.&quot;NAME&quot;, ABILITY.&quot;characterClass&quot;, ABILITY.DESCRIPTION, ABILITY.&quot;energyRequired&quot;, ABILITY.&quot;levelRequired&quot; FROM ABILITY WHERE ABILITY.ID = 3
+10:11:18.108 [Test worker] DEBUG Exposed - SELECT BUFF.&quot;NAME&quot;, BUFF.DURATION, BUFF.CHARACTER_ID FROM BUFF
+10:11:18.108 [Test worker] DEBUG Exposed - SELECT CHARACTERITEM.ID, CHARACTERITEM.ITEM_ID, CHARACTERITEM.CHARACTER_ID, CHARACTERITEM.QUANTITY FROM CHARACTERITEM
+10:11:18.110 [Test worker] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 2
+10:11:18.111 [Test worker] DEBUG Exposed - SELECT ITEMS.ID, ITEMS.QUANTITY, ITEMS.&quot;NAME&quot;, ITEMS.DESCRIPTION, ITEMS.PRICE FROM ITEMS WHERE ITEMS.ID = 3
+10:11:18.115 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS CHALLENGE
+10:11:18.115 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS BUFF
+10:11:18.116 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS CHARACTERABILITY
+10:11:18.117 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS ABILITY
+10:11:18.118 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS TASK
+10:11:18.119 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS CHARACTERITEM
+10:11:18.119 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS ITEMS
+10:11:18.120 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS USERCHARACTER
+10:11:18.121 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS &quot;CHARACTER&quot;
+10:11:18.121 [Test worker] DEBUG Exposed - DROP TABLE IF EXISTS &quot;USER&quot;
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 6.5</a> at Dec 14, 2020, 10:11:18 AM</p>
+</div>
+</div>
+</body>
+</html>
