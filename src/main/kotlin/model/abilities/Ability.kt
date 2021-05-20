@@ -1,7 +1,7 @@
 package model.abilities
 
 import kotlinx.serialization.Serializable
-import model.mainClasses.characterTable
+import model.main_classes.characterTable
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import repo.DefaultIdTable

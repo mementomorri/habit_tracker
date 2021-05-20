@@ -1,6 +1,6 @@
 package model.items
 
-import charactersRepo
+import model.main_classes.charactersRepo
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.transactions.transaction

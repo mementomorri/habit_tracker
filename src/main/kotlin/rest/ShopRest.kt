@@ -10,7 +10,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import model.items.Item
 import repo.Repo
-import shopRepo
+import model.main_classes.shopRepo
 
 fun Application.shopRest(
         repo: Repo<Item> = shopRepo,

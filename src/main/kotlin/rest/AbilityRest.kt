@@ -1,6 +1,6 @@
 package rest
 
-import abilitiesRepo
+import model.main_classes.abilitiesRepo
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -13,9 +13,9 @@ import model.abilities.Ability
 import repo.Repo
 
 fun Application.abilityRest(
-    repo: Repo<Ability> = abilitiesRepo,
-    path:String= "/ability",
-    serializer: KSerializer<Ability> = Ability.serializer()
+        repo: Repo<Ability> = abilitiesRepo,
+        path:String= "/ability",
+        serializer: KSerializer<Ability> = Ability.serializer()
 ){
     routing {
         route(path){

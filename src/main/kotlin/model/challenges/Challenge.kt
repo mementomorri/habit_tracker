@@ -1,9 +1,9 @@
 package model.challenges
 
-import charactersRepo
+import model.main_classes.charactersRepo
 import kotlinx.serialization.Serializable
-import model.mainClasses.Reward
-import model.mainClasses.Character
+import model.main_classes.Reward
+import model.main_classes.Character
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
@@ -27,7 +27,7 @@ open class Challenge (
 fun Challenge.checkShowingTheAttitudeCond(characterId: Int) :Boolean{
     val character= charactersRepo.read(characterId)
     return if (character == null) false else {
-        character.dailies.firstOrNull { it.completionCount >= 5 } != null
+        character.dailies.firstOrNull { it.completionCount!! >= 5 } != null
     }
 }
 

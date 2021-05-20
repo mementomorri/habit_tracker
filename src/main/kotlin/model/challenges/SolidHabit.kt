@@ -1,7 +1,7 @@
 package model.challenges
 
-import model.mainClasses.Character
-import model.mainClasses.Reward
+import model.main_classes.Character
+import model.main_classes.Reward
 
 class SolidHabit ():Challenge(
         "Solid habit",
@@ -10,7 +10,7 @@ class SolidHabit ():Challenge(
     override val rewards: Reward = Reward(0, 15, null)
 
     override fun checkChallengeCondition(character: Character): Boolean {
-        return character.habits.firstOrNull{it.completionCount>= 90} != null
+        return character.habits.firstOrNull{ it.completionCount!! >= 90} != null
     }
 }
 

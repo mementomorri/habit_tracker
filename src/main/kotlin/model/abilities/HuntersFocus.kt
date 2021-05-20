@@ -1,7 +1,7 @@
 package model.abilities
 
-import charactersRepo
-import model.mainClasses.Character
+import model.main_classes.charactersRepo
+import model.main_classes.Character
 
 class HuntersFocus (): Ability(
         "Hunter's focus",

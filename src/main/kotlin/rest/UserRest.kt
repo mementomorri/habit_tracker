@@ -8,7 +8,7 @@ import io.ktor.routing.*
 import io.ktor.util.pipeline.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
-import model.mainClasses.User
+import model.main_classes.User
 import repo.Repo
 import repo.UserRepoMap
 

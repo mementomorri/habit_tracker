@@ -1,6 +1,6 @@
 package repo
 
-import model.mainClasses.User
+import model.main_classes.User
 
 class UserRepoMap : Repo<User> {
 

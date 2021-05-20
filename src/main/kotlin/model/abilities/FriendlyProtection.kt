@@ -1,9 +1,9 @@
 package model.abilities
 
-import charactersRepo
-import model.mainClasses.Buff
-import model.mainClasses.Character
-import model.mainClasses.buffTable
+import model.main_classes.charactersRepo
+import model.main_classes.Buff
+import model.main_classes.Character
+import model.main_classes.buffTable
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 

@@ -1,7 +1,7 @@
 package rest
 
-import abilitiesRepo
-import charactersRepo
+import model.main_classes.abilitiesRepo
+import model.main_classes.charactersRepo
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -13,14 +13,11 @@ import kotlinx.serialization.json.Json
 import model.abilities.Ability
 import model.abilities.CharacterAbilityFiller
 import model.abilities.characterAbilityTable
-import model.items.CharacterItemFiller
 import model.items.Item
-import model.items.characterItemTable
-import model.mainClasses.*
+import model.main_classes.*
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import repo.Repo
 
@@ -37,6 +34,7 @@ fun Application.characterRest(
         route(path){
             get{
                 call.respond(repo.read())
+                HttpStatusCode.OK
             }
             post {
                 call.respond(

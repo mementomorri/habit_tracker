@@ -1,7 +1,7 @@
 package model.items
 
-import charactersRepo
-import model.mainClasses.taskTable
+import model.main_classes.charactersRepo
+import model.main_classes.taskTable
 import model.quests.DustRabbits
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class DustRabbitsScroll (
         override var quantity: Int
-): Item(quantity,"Dust rabbits scroll", "Some old scroll describing the story of Dust rabbits", 6) {
+): Item(quantity,"Dust rabbits scroll", "Some old scroll describing the story about Dust rabbits disaster", 6) {
 
     fun useItem(characterId: Int) {
         val character= charactersRepo.read(characterId)

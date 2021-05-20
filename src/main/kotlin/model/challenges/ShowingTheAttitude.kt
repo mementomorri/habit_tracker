@@ -1,7 +1,7 @@
 package model.challenges
 
-import model.mainClasses.Reward
-import model.mainClasses.Character
+import model.main_classes.Reward
+import model.main_classes.Character
 
 class ShowingTheAttitude ():Challenge(
         "Showing the attitude",
@@ -10,7 +10,7 @@ class ShowingTheAttitude ():Challenge(
     override val rewards: Reward = Reward(0, 20, null)
 
     override fun checkChallengeCondition(character: Character): Boolean {
-        return character.dailies.firstOrNull{it.completionCount>= 5} != null
+        return character.dailies.firstOrNull{it.completionCount!!>= 5} != null
     }
 }
 

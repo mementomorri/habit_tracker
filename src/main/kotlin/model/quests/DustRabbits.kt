@@ -1,16 +1,14 @@
 package model.quests
 
-import model.mainClasses.Reward
-
 class DustRabbits (
         override val characterId: Int,
-        override val difficulty: String="VERYHARD"
+        override var difficulty: String="VERYHARD"
 ): Quest(
         "Dust rabbits",
-        "Word on the streets is: there is dust rabbits at the desert near the town, they eat dust, reproduce them self and spread dust around, " +
-        "your mission is to clean up every corner at your home that'll make them stop and leave our great town of productive folks.",
-        difficulty,
-        characterId
+        "Word on the streets: there is dust rabbits at the desert near our town, they're eating dust, reproduce themself and spread dust around " +
+        "to populate the area, your mission is to clean up every corner at your home, that should make them stop and leave our great town of productive folks.",
+        characterId,
+        difficulty
 ) {
-    override val rewards: Reward = Reward(3* getIntOfDifficulty(),3* getIntOfDifficulty(), null)
+
 }

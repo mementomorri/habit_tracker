@@ -12,7 +12,7 @@ import model.challenges.Challenge
 import repo.ChallengeRepoMap
 
 fun Application.challengeRest(
-        repo: ChallengeRepoMap,
+        repo: ChallengeRepoMap = ChallengeRepoMap(),
         path:String= "/challenge",
         serializer: KSerializer<Challenge> = Challenge.serializer()
 ){

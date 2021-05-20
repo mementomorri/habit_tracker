@@ -1,6 +1,6 @@
 package model.abilities
 
-import model.mainClasses.Character
+import model.main_classes.Character
 
 class FrostChill(): Ability(
         "Frost chill",
@@ -12,10 +12,10 @@ class FrostChill(): Ability(
     fun useAbility(character: Character): Boolean {
         return if (character.energyPoints >= energyRequired){
             character.dailies.forEach {
-                it.deadline.plusDays(1)
+                it.deadline?.plusDays(1)
             }
             character.toDos.forEach {
-                it.deadline.plusDays(1)
+                it.deadline?.plusDays(1)
             }
             character.energyPoints.minus(energyRequired)
             true

@@ -1,7 +1,7 @@
 package model.items
 
-import charactersRepo
-import model.mainClasses.taskTable
+import model.main_classes.charactersRepo
+import model.main_classes.taskTable
 import model.quests.MagicInBottle
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
